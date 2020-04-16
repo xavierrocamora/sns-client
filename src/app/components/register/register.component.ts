@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit{
     public title:string;
     public user: User;
     public responseStatus: string;
+    public onErrorMessage;
 
     constructor(
         private _route: ActivatedRoute,
@@ -46,12 +47,19 @@ export class RegisterComponent implements OnInit{
                     this.responseStatus = 'success';
                     registerForm.reset();
                 }else{
+                    this.onErrorMessage = 'Could not register user!'
                     this.responseStatus = 'error';
                 }
                 
             },
             error => {
-                console.log(<any>error);
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    this.onErrorMessage = errorMessage.error.message;
+                    this.responseStatus = 'error';
+                }
             }
         );
     }
