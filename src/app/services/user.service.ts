@@ -86,11 +86,26 @@ export class UserService{
     // Method for updating changes on the user's profile
     updateUser(user: User): Observable<any>{
         let params = JSON.stringify(user);
-        console.log('envio ' + params);
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                         .set('authorization', 'Token ' + this.getToken());
         
         return this._http.put(this.url + 'users/' + user._id, params, {headers: headers});
+    }
+
+     // Method for getting a paginated list of all users
+     getUsers(page = null): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + this.getToken());
+        
+        return this._http.get(this.url + 'users/page/' + page, {headers: headers});
+    }
+
+      // Method for getting a specified user profile
+      getUser(id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + this.getToken());
+        
+        return this._http.get(this.url + 'users/' + id, {headers: headers});
     }
 
 }
