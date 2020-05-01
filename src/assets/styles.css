@@ -66,3 +66,33 @@
     border-radius: 10px;
     text-align: center;
 }
+
+.itemUser .userImage{
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.itemUser .userImage img{
+    width: 120px;
+}
+
+.itemUser .userName{
+    margin-top: 10px;
+}
+
+.itemUser .userName .userNickname{
+    color: #969393;
+}
+
+.itemUser .userName .nameAndSurname{
+    color: #555;
+    font-weight: bold;
+}
+
+.defaultImage{
+    width: 100% !important;
+}
+
