@@ -73,7 +73,7 @@ export class UserService{
 
     // get counters from localStorage instead of sending a petition again
     getStoredCounters(){
-        let storedCounters = JSON.parse(localStorage.getItem('counters'));
+        let storedCounters = JSON.parse(localStorage.getItem('statCounters'));
 
         if(storedCounters !="undefined"){
             this.statCounters = storedCounters;
