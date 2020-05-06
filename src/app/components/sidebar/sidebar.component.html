@@ -68,7 +68,9 @@
         Failed to create a publication
     </div>
   
-    <form #newPublicationForm="ngForm" (ngSubmit)="onSubmit(newPublicationForm)" class="col-lg-10">
+    <form #newPublicationForm="ngForm" 
+    (ngSubmit)="onSubmit(newPublicationForm);sendPublication($event);" 
+    class="col-lg-10">
         <p>
             <label>What are you thinking today?</label>
             <textarea name="text" #text="ngModel" [(ngModel)]="publication.text" class="

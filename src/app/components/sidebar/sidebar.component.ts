@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import { Publication } from '../../models/publication';
 import { PublicationService } from '../../services/publication.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'sidebar',
@@ -18,6 +19,8 @@ export class SidebarComponent implements OnInit{
     public publication: Publication;
 
     constructor(
+        private _route: ActivatedRoute,
+        private _router: Router,
         private _userService: UserService,
         private _publicationService: PublicationService
     ){
@@ -42,6 +45,7 @@ export class SidebarComponent implements OnInit{
                     this.status = 'success';
                     // reset the form upon successfully creating a publication !
                     form.reset();
+                    this._router.navigate(['/timeline']);
                 }else{
                     this.status = 'error';
                 }
@@ -57,5 +61,13 @@ export class SidebarComponent implements OnInit{
             }
 
         );
+    }
+
+    // Output
+    @Output() sent = new EventEmitter();
+    // auxiliary function to inform the parent Timeline component
+    // that a new publication was done
+    sendPublication(event){
+        this.sent.emit({send: 'true'});
     }
 }

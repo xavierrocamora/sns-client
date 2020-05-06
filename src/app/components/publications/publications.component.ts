@@ -8,12 +8,12 @@ import { GLOBAL } from '../../services/global';
 declare var $: any;
 
 @Component({
-    selector: 'timeline',
-    templateUrl: './timeline.component.html',
+    selector: 'publications',
+    templateUrl: './publications.component.html',
     providers: [UserService, UploadService, PublicationService]
 })
 
-export class TimelineComponent implements OnInit{
+export class PublicationsComponent implements OnInit{
     public identity;
     public token;
     public title: string;
@@ -32,7 +32,7 @@ export class TimelineComponent implements OnInit{
         private _userService: UserService,
         private _publicationService: PublicationService
     ){
-        this.title = "Timeline";
+        this.title = "Publications";
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
         this.url = GLOBAL.url;
@@ -40,7 +40,7 @@ export class TimelineComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('Timeline component loaded...');
+        console.log('Publications component loaded...');
         this.getPublications(this.page);
     }
 
@@ -95,11 +95,6 @@ export class TimelineComponent implements OnInit{
             this.page += 1;
         }
         this.getPublications(this.page, true);
-    }
-
-    refresh(event){
-        console.log(event);
-        this.getPublications(this.page);
     }
 
 }

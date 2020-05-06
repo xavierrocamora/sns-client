@@ -76,7 +76,6 @@ export class UsersComponent implements OnInit{
                 if(!response.users){
                     this.status = 'error';
                 }else{
-                    console.log(response);
                     this.total = response.total;
                     this.users = response.users;
                     this.pages = response.pages;

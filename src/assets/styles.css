@@ -190,3 +190,23 @@
 #publications{
     min-height: 500px;
 }
+
+#publications .date{
+    color: gray;
+}
+
+.item-publication .userImage{
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.item-publication .userImage img{
+    width: 120px;
+}
+
+.item-publication .userName{
+    margin-top: 10px;
+}
