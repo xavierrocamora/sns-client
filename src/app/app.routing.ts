@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserEditComponent } from './components/userEdit/userEdit.component';
 import { UsersComponent } from './components/users/users.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -16,6 +17,7 @@ const appRoutes: Routes = [
     {path: 'editProfile', component: UserEditComponent},
     {path: 'community', component: UsersComponent},
     {path: 'community/:page', component: UsersComponent},
+    {path: 'timeline', component: TimelineComponent},
     {path: '**', component: HomeComponent},
 ];
 
