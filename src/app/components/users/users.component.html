@@ -12,7 +12,7 @@
                     </div>
                     <div class="userName pull-left">
                         <p class="nameAndSurname">
-                            <a href="#">
+                            <a [routerLink]="['/profile', user._id]">
                                 {{user.name + ' ' + user.surname}}
                             </a>
                         </p>
@@ -36,7 +36,6 @@
                         (click)="unfollowUser(user._id)"
                         [class.btn-danger]="user._id == followUserOver"
                         >
-
                             <span *ngIf="user._id == followUserOver; else following">
                                 <span class="glyphicon glyphicon-minus-sign"></span>
                                 Stop following
@@ -44,16 +43,10 @@
                             <ng-template #following>
                                 <span class="glyphicon glyphicon-ok-sign"></span>
                                 Following
-                            </ng-template>
-                            
-                            
-                            
+                            </ng-template>  
                         </button>
-
                     </div>
-
-                </div>
-                
+                </div> 
             </div>
         </div>
 

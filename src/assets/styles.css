@@ -210,3 +210,37 @@
 .item-publication .userName{
     margin-top: 10px;
 }
+
+/*PROFILES*/
+#dataProfile{
+    min-height: 500px;
+    text-align: center;
+}
+
+#dataProfile .userImage{
+    width: 185px;
+    height: 185px;
+    border-radius: 400px;
+    overflow: hidden;
+    margin-right: 15px; 
+}
+
+#dataProfile .userImage img{
+    width: 100%;
+}
+
+#dataProfile .userName{
+    margin-top: 40px;
+}
+
+#dataProfile .userName .name{
+    font-size: 24px;
+    font-weight: bold;
+    color: #555
+}
+
+#dataProfile .userName .nickname{
+    font-size: 19px;
+    font-weight: bold;
+    color: gray;
+}
