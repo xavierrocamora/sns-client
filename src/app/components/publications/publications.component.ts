@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Publication } from '../../models/publication';
 import { UserService } from '../../services/user.service';
@@ -26,6 +26,8 @@ export class PublicationsComponent implements OnInit{
     public publications: Publication[];
     public reachedEnd = false;
 
+    @Input() userId: string;
+
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
@@ -41,11 +43,11 @@ export class PublicationsComponent implements OnInit{
 
     ngOnInit(){
         console.log('Publications component loaded...');
-        this.getPublications(this.page);
+        this.getPublications(this.userId, this.page);
     }
 
-    getPublications(page, stackPublications = false){
-        this._publicationService.getPublications(this.token, page).subscribe(
+    getPublications(userId, page, stackPublications = false){
+        this._publicationService.getPublicationsUser(this.token, userId, page).subscribe(
             response => {
                 if(response.publications){
                     this.total = response.total;
@@ -94,7 +96,7 @@ export class PublicationsComponent implements OnInit{
         }else{
             this.page += 1;
         }
-        this.getPublications(this.page, true);
+        this.getPublications(this.userId, this.page, true);
     }
 
 }

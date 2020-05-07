@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit{
         });
     }
 
-    // method for getting the data concerning a user and if the given user is following
+    // method for getting the data concerning an user and if the given user is following
     // or being followed by the authenticated user
     getUser(id){
         this._userService.getUser(id).subscribe(
@@ -60,7 +60,8 @@ export class ProfileComponent implements OnInit{
                 if(response.user){
                     this.user = response.user;
 
-                    if(response.following._id){
+                    // set value for flag following
+                    if(response.following && response.following._id){
                         this.following = true;
 
                     }else{
@@ -68,7 +69,8 @@ export class ProfileComponent implements OnInit{
 
                     }
 
-                    if(response.followed._id){
+                    // set value for flag followed
+                    if(response.followed && response.followed._id){
                         this.followed = true;
 
                     }else{
@@ -95,7 +97,7 @@ export class ProfileComponent implements OnInit{
 
     // get statistic counters for a specified user id
     getCounters(id){
-        this._userService.getCounters().subscribe(
+        this._userService.getCounters(id).subscribe(
             response => {
                 console.log(response);
                 this.statCounters = response;
@@ -111,5 +113,66 @@ export class ProfileComponent implements OnInit{
             }
         );
     }
+
+    followUser(followed){
+        let follow = new Follow('',this.identity._id, followed);
+
+        this._followService.addFollow(this.token, follow).subscribe(
+            response =>{
+                if(!response.follow.followedUser){
+                    this.status = 'error';
+                }else{
+                    this.status = 'success';
+                    // set value for flag following
+                    this.following = true;
+                }
+            },
+            error => {
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    //this.onErrorMessage = errorMessage.error.message;
+                    this.status = 'error';
+                }         
+            }
+        );
+    }
+
+     // receive an user id
+    // send petition to stop following that user
+    unfollowUser(followed){
+        
+        this._followService.deleteFollow(this.token, followed).subscribe(
+            response => {
+                if(!response){
+                    this.status = 'error';
+                }else{
+                    this.following = false;
+                    this.status = 'success';    
+                }
+            },
+            error => {
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    //this.onErrorMessage = errorMessage.error.message;
+                    this.status = 'error';
+                }         
+            }
+        );
+    }
+
+    // pair of auxiliary functions to help the "follow/unfollow button switching" effect
+    public followUserOver;
+    mouseEnter(user_id){
+        this.followUserOver = user_id;
+    }
+
+    mouseLeave(){
+        this.followUserOver = 0;
+    }
+
 
 }

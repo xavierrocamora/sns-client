@@ -213,7 +213,7 @@
 
 /*PROFILES*/
 #dataProfile{
-    min-height: 500px;
+    min-height: 240px;
     text-align: center;
 }
 
@@ -230,7 +230,11 @@
 }
 
 #dataProfile .userName{
-    margin-top: 40px;
+    margin-top: 15px;
+}
+
+#dataProfile .userName .label{
+    margin-bottom: 15px;
 }
 
 #dataProfile .userName .name{
@@ -243,4 +247,17 @@
     font-size: 19px;
     font-weight: bold;
     color: gray;
+}
+
+#dataProfile .statCounters{
+    border-left: 4px solid #ccc;
+    margin-left: 35px;
+    padding-left: 25px;
+    height: 180px;
+}
+
+#dataProfile .statCounters a{
+    font-size: 20px;
+    line-height: 35px;
+    color: #555;
 }
