@@ -39,7 +39,7 @@ export class SidebarComponent implements OnInit{
     }
 
     // method for sending a petition to create a new publication
-    onSubmit(form){
+    onSubmit(form, $event){
         console.log(this.publication);
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
@@ -61,6 +61,7 @@ export class SidebarComponent implements OnInit{
                         //successfully creating a publication !
                         form.reset();
                         this._router.navigate(['/timeline']);
+                        this.sent.emit({send: 'true'});
                     });
                       
                 }else{

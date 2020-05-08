@@ -69,7 +69,7 @@
     </div>
   
     <form #newPublicationForm="ngForm" 
-    (ngSubmit)="onSubmit(newPublicationForm);sendPublication($event);" 
+    (ngSubmit)="onSubmit(newPublicationForm, $event);" 
     class="col-lg-10">
         <p>
             <label>What are you thinking today?</label>

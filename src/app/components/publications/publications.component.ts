@@ -25,6 +25,7 @@ export class PublicationsComponent implements OnInit{
     public itemsPerPage;
     public publications: Publication[];
     public reachedEnd = false;
+    public showImage;
 
     @Input() userId: string;
 
@@ -97,6 +98,17 @@ export class PublicationsComponent implements OnInit{
             this.page += 1;
         }
         this.getPublications(this.userId, this.page, true);
+    }
+
+    // pair of auxiliary functions to toggle showing/hiding an image from a publication
+    // TODO: at current only one image can be shown at a same time, make show multiple
+    showPublicationImage(id){
+        this.showImage = id;
+    }
+
+    hidePublicationImage(id){
+        // hide
+        this.showImage = 0;
     }
 
 }
