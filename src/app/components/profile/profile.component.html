@@ -1,0 +1,104 @@
+<div class="col-lg-8">
+    <h1 class="h1-strong">
+        {{title}}
+    </h1>
+
+    <div id="dataProfile" *ngIf="user">
+        <!-- user's avatar -->
+        <div class="userImage pull-left">
+                <img src="{{url + 'users/downloadImg/' + user.image}}" 
+                *ngIf="user.image"/>
+                <img src="assets/user.jpg" class="defaultImage" 
+                *ngIf="!user.image"/>       
+        </div>
+
+        <!-- user's personal data -->
+        <div class="userName pull-left">
+
+            <div class="follow pull-left" >
+                <div class="label label-default pull-left" *ngIf="followed">
+                    Following you
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="pull-left">
+                <p class="name">
+                    {{user.name + ' ' + user.surname}}
+                </p>
+                <p class="nickname">
+                    {{user.nickname}}
+                </p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="follow pull-left">
+                <button 
+                    class="btn btn-success" 
+                    *ngIf="!following" 
+                    (click)="followUser(user._id)"
+                >
+                    Follow
+                </button>
+                <button 
+                    class="btn btn-primary" 
+                    *ngIf="following" 
+                    (click)="unfollowUser(user._id)"
+                    (mouseenter) = "mouseEnter(user._id)"
+                    (mouseleave) = "mouseLeave()"
+                    [class.btn-danger] = "user._id == followUserOver"
+                >
+                    <span *ngIf="user._id == followUserOver; else following">
+                        Stop following
+                    </span>
+                    <ng-template #following>
+                        Following
+                    </ng-template>  
+                </button>
+            </div>
+                  
+        </div>
+
+        <!-- user statistic counters -->
+        <div class="statCounters pull-left" *ngIf="statCounters">
+            <div class="userStatCounter">
+                <a [routerLink]="['/following', user._id, 1]">
+                    <span class="labelCounters">
+                        Following
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.followed}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="userStatCounter">
+                <a [routerLink]="['/followers', user._id, 1]">
+                    <span class="labelCounters">
+                        Followers
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.followers}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="userStatCounter">
+                <a href="#">
+                    <span class="labelCounters">
+                        Publications
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.publications}}
+                    </span>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-12 publications" *ngIf="user">
+        <publications [userId]="user._id"></publications>
+    </div>
+    
+      
+</div>
+
+<sidebar></sidebar>

@@ -29,4 +29,31 @@ export class FollowService{
         return this._http.delete(this.url + 'follows/' + id, {headers: headers});
     }
 
+    // method for getting a paginated list of all users followed by a specified user
+    // if no id then user is the authenticated one
+    getFollowedUsers(token, id = null, page=1): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + token);
+        
+        let url = this.url + 'followedUsers/';
+        if(id != null){
+            url = this.url + 'followedUsers/' + id + '/' + page;
+        }
+        return this._http.get(url, {headers: headers});   
+    }
+
+    // method for getting a paginated list of all users following specified user
+    // if no id then user is the authenticated one
+    getFollowers(token, id = null, page=1): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + token);
+        
+        let url = this.url + 'followers/';
+        if(id != null){
+            url = this.url + 'followers/' + id + '/' + page;
+        }
+        return this._http.get(url, {headers: headers});   
+    }
+
+
 }

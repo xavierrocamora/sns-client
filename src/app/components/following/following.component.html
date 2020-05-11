@@ -1,8 +1,9 @@
 <div class="col-lg-8">
-    <h1 class="h1-strong">{{title}}</h1>
+    <h1 class="h1-strong">{{title}} {{user.name}}</h1>
 
-    <div class="communityUsers">
-        <!-- Listing Community Users -->
+    <div class="followedUsers">
+
+        <!-- Listing followed Users -->
         <div *ngFor="let user of users" class="itemUser">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -53,10 +54,10 @@
         <!-- Paginated Navigation -->
         <ul class="pagination pull-right">
             <li *ngIf="page > 1">
-                <a [routerLink]="['/community', prevPage]">Previous</a>
+                <a [routerLink]="['/following', userPageId, prevPage]">Previous</a>
             </li>
             <li *ngIf="pages != page">
-                <a [routerLink]="['/community', nextPage]">Next</a>
+                <a [routerLink]="['/following', userPageId, nextPage]">Next</a>
             </li>
         </ul>
     </div>

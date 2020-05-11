@@ -25,6 +25,7 @@ export class TimelineComponent implements OnInit{
     public itemsPerPage;
     public publications: Publication[];
     public reachedEnd = false;
+    public showImage;
 
     constructor(
         private _route: ActivatedRoute,
@@ -100,6 +101,40 @@ export class TimelineComponent implements OnInit{
     refresh(event){
         console.log(event);
         this.getPublications(this.page);
+    }
+
+    // pair of auxiliary functions to toggle showing/hiding an image from a publication
+    // TODO: at current only one image can be shown at a same time, make show multiple
+    showPublicationImage(id){
+        this.showImage = id;
+    }
+
+    hidePublicationImage(id){
+        // hide
+        this.showImage = 0;
+    }
+
+    // method to delete a specified publication
+    deletePublication(publicationId){
+        this._publicationService.deletePublication(this.token, publicationId).subscribe(
+            response =>{
+                console.log(response);
+                // refresh the board
+                this.getPublications(this.page);
+
+            },
+            error => {
+                let errorMessage = <any>error;
+                console.log(errorMessage);
+
+                if(errorMessage != null){
+                    //this.onErrorMessage = errorMessage.error.message;
+                    this.status = 'error';
+                }
+            }
+
+        );
+
     }
 
 }

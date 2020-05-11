@@ -56,7 +56,6 @@ export class UserEditComponent implements OnInit{
                     this._uploadService.makeFileRequest(this.url + 'users/uploadImg/' + this.user._id,
                     [], this.filesToUpload, this.token, 'image')
                     .then((result: any) => {
-                        console.log(result);
                         this.user.image = result.user.image;
                         localStorage.setItem('userProfile', JSON.stringify(this.user));
 
@@ -78,8 +77,6 @@ export class UserEditComponent implements OnInit{
     // use angular form event (change) to "capture" the files added on formfield type file
     onFileChange(fileInput: any){
         this.filesToUpload = <Array<File>>fileInput.target.files;
-        console.log(this.filesToUpload);
-
     }
 
     

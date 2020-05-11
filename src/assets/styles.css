@@ -210,3 +210,65 @@
 .item-publication .userName{
     margin-top: 10px;
 }
+
+/*PROFILES*/
+#dataProfile{
+    min-height: 240px;
+    text-align: center;
+}
+
+#dataProfile .userImage{
+    width: 185px;
+    height: 185px;
+    border-radius: 400px;
+    overflow: hidden;
+    margin-right: 15px; 
+}
+
+#dataProfile .userImage img{
+    width: 100%;
+}
+
+#dataProfile .userName{
+    margin-top: 15px;
+}
+
+#dataProfile .userName .label{
+    margin-bottom: 15px;
+}
+
+#dataProfile .userName .name{
+    font-size: 24px;
+    font-weight: bold;
+    color: #555
+}
+
+#dataProfile .userName .nickname{
+    font-size: 19px;
+    font-weight: bold;
+    color: gray;
+}
+
+#dataProfile .statCounters{
+    border-left: 4px solid #ccc;
+    margin-left: 35px;
+    padding-left: 25px;
+    height: 180px;
+}
+
+#dataProfile .statCounters a{
+    font-size: 20px;
+    line-height: 35px;
+    color: #555;
+}
+
+/* FOLLOWING */
+.followedUsers{
+    min-height: 500px;
+}
+
+/* FOLLOWERs */
+.followerUsers{
+    min-height: 500px;
+}
+

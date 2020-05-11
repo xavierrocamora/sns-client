@@ -11,7 +11,7 @@
     </div>
 
     <div class="nameAndSurname pull-left">
-        <a href="#" class="username">
+        <a [routerLink]="['/profile', identity._id]" class="username">
             {{identity.name + ' ' + identity.surname}}
         </a>
         <p class="nickname">
@@ -25,7 +25,7 @@
 
     <div class="statCounters" *ngIf="statCounters">
         <div class="userStatCounter">
-            <a href="#">
+            <a [routerLink]="['/following', identity._id, 1]">
                 <span class="labelCounters">
                     Following
                 </span>
@@ -36,7 +36,7 @@
         </div>
 
         <div class="userStatCounter">
-            <a href="#">
+            <a [routerLink]="['/followers', identity._id, 1]">
                 <span class="labelCounters">
                     Followers
                 </span>
@@ -69,7 +69,7 @@
     </div>
   
     <form #newPublicationForm="ngForm" 
-    (ngSubmit)="onSubmit(newPublicationForm);sendPublication($event);" 
+    (ngSubmit)="onSubmit(newPublicationForm, $event);" 
     class="col-lg-10">
         <p>
             <label>What are you thinking today?</label>
@@ -82,7 +82,7 @@
 
         <p>
             <label>Upload a picture</label>
-            <input type="file" placeholder="Upload image" />
+            <input type="file" placeholder="Upload image" (change)="fileChangeEvent($event)"/>
         </p>
 
         <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPublicationForm.
