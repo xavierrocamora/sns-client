@@ -9,6 +9,8 @@ import { UserEditComponent } from './components/userEdit/userEdit.component';
 import { UsersComponent } from './components/users/users.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FollowingComponent } from './components/following/following.component';
+import { FollowersComponent } from './components/followers/followers.component';
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,6 +22,8 @@ const appRoutes: Routes = [
     {path: 'community/:page', component: UsersComponent},
     {path: 'timeline', component: TimelineComponent},
     {path: 'profile/:id', component: ProfileComponent},
+    {path: 'following/:id/:page', component: FollowingComponent},
+    {path: 'followers/:id/:page', component: FollowersComponent},
     {path: '**', component: HomeComponent},
 ];
 

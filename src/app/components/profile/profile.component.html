@@ -60,7 +60,7 @@
         <!-- user statistic counters -->
         <div class="statCounters pull-left" *ngIf="statCounters">
             <div class="userStatCounter">
-                <a href="#">
+                <a [routerLink]="['/following', user._id, 1]">
                     <span class="labelCounters">
                         Following
                     </span>
@@ -71,7 +71,7 @@
             </div>
     
             <div class="userStatCounter">
-                <a href="#">
+                <a [routerLink]="['/followers', user._id, 1]">
                     <span class="labelCounters">
                         Followers
                     </span>

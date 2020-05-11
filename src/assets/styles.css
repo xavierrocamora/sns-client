@@ -261,3 +261,14 @@
     line-height: 35px;
     color: #555;
 }
+
+/* FOLLOWING */
+.followedUsers{
+    min-height: 500px;
+}
+
+/* FOLLOWERs */
+.followerUsers{
+    min-height: 500px;
+}
+
