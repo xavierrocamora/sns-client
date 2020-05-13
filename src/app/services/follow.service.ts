@@ -55,5 +55,14 @@ export class FollowService{
         return this._http.get(url, {headers: headers});   
     }
 
+    // method for getting a list of followers for the auth user
+    // mainly used in the messagery module 
+    getMyFollows(token): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + token);
+        
+        return this._http.get(this.url + 'follows/true', {headers: headers});
+    }
+
 
 }

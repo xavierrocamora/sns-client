@@ -1,5 +1,49 @@
 <div class="col-lg-10">
     <h3>{{title}}</h3>
 
-    <!-- received messages list -->
+    <!-- Received messages list -->
+    <div class="followedUsers" *ngIf="messages">
+
+        <!-- Listing messages received by the user -->
+        <div *ngFor="let message of messages" class="itemUser">
+            <div class="panel panel-default" *ngIf="message.sender">
+                <div class="panel-body">
+                    <div class="userImage pull-left">
+                        <img src="{{url + 'users/downloadImg/' + message.sender.image}}" *ngIf="message.sender.image"/>
+                        <img src="assets/user.jpg" class="defaultImage" *ngIf="!message.sender.image"/>
+                    </div>
+                    <div class="userName pull-left">
+                        <p class="nameAndSurname">
+                            <a [routerLink]="['/profile', message.sender._id]">
+                                {{message.sender.name + ' ' + message.sender.surname}}
+                            </a>
+                            &nbsp;|&nbsp;
+                            <span class="userNickname">
+                                    {{message.sender.nickname}}
+                            </span>
+                            &nbsp;|&nbsp;
+                            <span class="date">
+                                {{ ( message.created_at | amFromUnix ) | amTimeAgo }}
+                            </span>
+                        </p>
+                        <p>
+                            {{message.text}}
+                        </p>
+                        
+                    </div>
+                    
+                </div> 
+            </div>
+        </div>
+
+        <!-- Paginated Navigation -->
+        <ul class="pagination pull-right">
+            <li *ngIf="page > 1">
+                <a [routerLink]="['/messages/received', prevPage]">Previous</a>
+            </li>
+            <li *ngIf="pages != page">
+                <a [routerLink]="['/messages/received', nextPage]">Next</a>
+            </li>
+        </ul>
+    </div>
 </div>
