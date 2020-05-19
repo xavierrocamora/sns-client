@@ -99,7 +99,6 @@ export class TimelineComponent implements OnInit{
     }
 
     refresh(event){
-        console.log(event);
         this.getPublications(this.page);
     }
 
@@ -118,10 +117,8 @@ export class TimelineComponent implements OnInit{
     deletePublication(publicationId){
         this._publicationService.deletePublication(this.token, publicationId).subscribe(
             response =>{
-                console.log(response);
                 // refresh the board
                 this.getPublications(this.page);
-
             },
             error => {
                 let errorMessage = <any>error;

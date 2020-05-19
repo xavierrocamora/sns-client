@@ -32,7 +32,7 @@ export class AddComponent implements OnInit{
         this.title = 'Send a message';
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
-        this.message = new Message('', this.identity._id, '', '', '', '');
+        this.message = new Message('', this.identity._id, '', '', '', 'false');
         this.url = GLOBAL.url;
     }
 

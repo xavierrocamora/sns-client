@@ -1,6 +1,6 @@
 /* GENERIC */
 .h1-strong {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     margin-left: 13px;
     margin-bottom: 20px;
@@ -260,6 +260,11 @@
     font-size: 20px;
     line-height: 35px;
     color: #555;
+}
+
+#loadedFile {
+    color: blue;
+    height: 30px;
 }
 
 /* FOLLOWING */

@@ -34,4 +34,12 @@ export class MessageService{
 
         return this._http.get(this.url + 'messages/sent/'+ page, {headers: headers});
     }
+
+    // Get the number of messages marked as non read
+    getNonReadCounter(token): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + token);
+
+        return this._http.get(this.url + 'messages/mailbox/notRead', {headers: headers});
+    }
 }

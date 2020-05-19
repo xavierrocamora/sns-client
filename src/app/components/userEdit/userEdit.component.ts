@@ -36,11 +36,9 @@ export class UserEditComponent implements OnInit{
        
     ngOnInit(){
         console.log('userEdit component loaded...');
-        console.log(this.user);
     }
 
     onSubmit(){
-        console.log(this.user);
         this._userService.updateUser(this.user).subscribe(
             response => {
                 if(!response.user){
