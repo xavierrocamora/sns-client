@@ -48,7 +48,6 @@ export class ReceivedComponent implements OnInit{
         // get the page parameter from url and convert it to integer (+)
         this._route.params.subscribe(params =>{
             let page = +params['page'];
-            this.page = page;
 
             if(!params['page']){
                 page = 1;
@@ -64,6 +63,7 @@ export class ReceivedComponent implements OnInit{
                     this.prevPage = 1;
                 }
             }
+            this.page = page;
 
             // get the messages sent by the user
             this.getMessages(this.token, this.page);
@@ -93,6 +93,41 @@ export class ReceivedComponent implements OnInit{
                 
             }
         );
+    }
+
+    markAsRead(id, read){
+        console.log(id);
+        if (read == 'false'){
+            this._messageService.setAsRead(this.token, id).subscribe(
+                response => {
+                    if (!response.message){
+                        this.status = 'error';
+                    }else{
+                        // don't refresh the page, instead
+                        // search for the element in messages and modify read property
+                        let search = this.messages.findIndex(message => message._id == id );
+                        if (search != -1){
+                            console.log(search);
+                            this.messages[search].read = 'true';
+                            this.status = 'success';
+                            console.log('message ' + id + ' marked as read');
+                        }else{
+                            this.status = 'error';
+                        }     
+                        
+                    }
+                },
+                error => {
+                    let errorMessage = <any>error;
+                    console.log(errorMessage);
+    
+                    if(errorMessage != null){
+                        //this.onErrorMessage = errorMessage.error.message;
+                        this.status = 'error';
+                    }      
+                }
+            );
+        }
     }
 
 

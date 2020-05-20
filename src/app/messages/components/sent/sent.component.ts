@@ -48,7 +48,6 @@ export class SentComponent implements OnInit{
         // get the page parameter from url and convert it to integer (+)
         this._route.params.subscribe(params =>{
             let page = +params['page'];
-            this.page = page;
 
             if(!params['page']){
                 page = 1;
@@ -64,6 +63,7 @@ export class SentComponent implements OnInit{
                     this.prevPage = 1;
                 }
             }
+            this.page = page;
 
             // get the messages sent by the user
             this.getMessages(this.token, this.page);

@@ -8,6 +8,10 @@
     border-bottom: 1px solid #eee;
 }
 
+#fixedNavBar {
+    position: fixed;
+}
+
 .active {
     background: #9c1111;
 }
@@ -277,3 +281,40 @@
     min-height: 500px;
 }
 
+/* RECEIVED MESSAGES SECTION */
+.itemMessage .messageImage{
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.itemMessage .messageImage img{
+    width: 120px;
+}
+
+.itemMessage .userName{
+    margin-top: 10px;
+}
+
+.itemMessage .userName .userNickname{
+    color: #969393;
+}
+
+.itemMessage .userName .nameAndSurname{
+    color: #555;
+    font-weight: bold;
+}
+
+.defaultImage{
+    width: 100% !important;
+}
+
+#viewMessage {
+    margin-top: 30px !important;
+}
+
+.messageText {
+    margin-left: 5px;
+}

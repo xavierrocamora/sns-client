@@ -42,4 +42,12 @@ export class MessageService{
 
         return this._http.get(this.url + 'messages/mailbox/notRead', {headers: headers});
     }
+
+    // Method for marking a message as read
+    setAsRead(token, id): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                        .set('authorization', 'Token ' + token);
+        
+        return this._http.put(this.url + 'messages/mailbox/setAsRead/' + id, null, {headers: headers});
+    }
 }
