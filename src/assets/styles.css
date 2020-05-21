@@ -318,3 +318,45 @@
 .messageText {
     margin-left: 5px;
 }
+
+.modal-header {
+    background-color:  #bd2020;
+    color: white;
+}
+
+.modal-header .button {
+    color: white !important;
+}
+
+.modal-content {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-body .nameAndSurname {
+    font-weight: bold;
+}
+
+.modal-body .nameAndSurname .userNickname {
+    color: gray;
+    font-weight: bold;
+}
+
+.modal-body .nameAndSurname .date {
+    color:  #555;
+}
+
+.messageBody {
+    border: 1px solid #888;
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.modal-footer {
+    background-color: #888;
+}
+
+.sidebar-admin {
+    border: 1px solid #888;
+    border-radius: 10px;
+}

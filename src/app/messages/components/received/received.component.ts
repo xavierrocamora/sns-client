@@ -25,6 +25,7 @@ export class ReceivedComponent implements OnInit{
     public nextPage;
     public total;
     public pages;
+    public hidden = true;
 
     constructor(
         private _route: ActivatedRoute,
