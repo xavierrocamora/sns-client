@@ -91,7 +91,6 @@ export class FollowingComponent implements OnInit{
                 if(!response.follows){
                     this.status = 'error';
                 }else{
-                    console.log(response);
                     this.total = response.total;
                     this.pages = response.pages;
                     
@@ -102,8 +101,6 @@ export class FollowingComponent implements OnInit{
                         this.users.push(response.follows[i].followedUser);
                     }
                     this.followedUsers = response.followedUsers;
-                    console.log(this.users);
-                    console.log(this.followedUsers);
                     
                     if(page > response.pages){
                         this._router.navigate(['/following',userId, 1]);

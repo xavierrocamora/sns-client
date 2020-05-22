@@ -44,5 +44,4 @@ export class PublicationService{
         return this._http.delete(this.url + 'publications/' + id, {headers: headers});
     }
 
-
 }

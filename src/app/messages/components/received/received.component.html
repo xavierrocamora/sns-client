@@ -1,0 +1,22 @@
+<div class="col-lg-10">
+    <h3>{{title}}</h3>
+
+    <!-- Received messages list -->
+    <div class="followedUsers" *ngIf="messages">
+
+        <!-- Listing messages received by the user -->
+        <div *ngFor="let message of messages" class="itemMessage">
+            <message [message]="message" [mode]="'received'" ></message>
+        </div>
+
+        <!-- Paginated Navigation -->
+        <ul class="pagination pull-right">
+            <li *ngIf="page > 1">
+                <a [routerLink]="['/messages/received', prevPage]">Previous</a>
+            </li>
+            <li *ngIf="pages != page">
+                <a [routerLink]="['/messages/received', nextPage]">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>

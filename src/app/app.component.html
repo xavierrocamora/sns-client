@@ -29,6 +29,13 @@
           </a>
         </li>
 
+        <li>
+          <a [routerLink]="['/messages/received']" [routerLinkActive]="['active']">
+            <span class="glyphicon glyphicon-envelope"></span>
+            Messages
+          </a>
+        </li>
+
       </ul>
 
       <ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">

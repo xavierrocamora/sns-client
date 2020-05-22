@@ -65,7 +65,7 @@
         Publication successfully created
     </div>
     <div class="alert alert-danger" *ngIf="status == 'error'">
-        Failed to create a publication
+        {{onErrorMessage}}
     </div>
   
     <form #newPublicationForm="ngForm" 
@@ -82,8 +82,11 @@
 
         <p>
             <label>Upload a picture</label>
-            <input type="file" placeholder="Upload image" (change)="fileChangeEvent($event)"/>
+            <input #myFileInputField type="file" placeholder="Upload image" (change)="fileChangeEvent($event)"/>
         </p>
+        <div id="loadedFile" *ngIf="filesToUpload && filesToUpload.length > 0">
+            File ready: {{filesToUpload[0].name}}
+        </div>
 
         <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPublicationForm.
         form.valid" />

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from "@angular/core";
 import { UserService } from '../../services/user.service';
 import { GLOBAL } from '../../services/global';
 import { Publication } from '../../models/publication';
@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit{
     public status;
     public publication: Publication;
     public filesToUpload: Array<File>;
+    public onErrorMessage: string;
 
     constructor(
         private _route: ActivatedRoute,
@@ -34,38 +35,57 @@ export class SidebarComponent implements OnInit{
         this.publication = new Publication("", this.identity._id, "", "", "");
     }
 
+    @ViewChild('myFileInputField') fileField: ElementRef;
+
     ngOnInit(){
         console.log("Sidebar component loaded...");
     }
 
     // method for sending a petition to create a new publication
     onSubmit(form, $event){
-        console.log(this.publication);
+        console.log('before sending ', this.publication);
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
                 if(response.publication){
-                    this.publication = response.publication;
-                    
                     // once response returns publication id
                     // UPLOAD USER FILES IF ANY
-                    
-                    this._uploadService.makeFileRequest(this.url + 'publications/uploadImg/' + response.publication._id,
+                    if (this.filesToUpload != undefined && this.filesToUpload.length > 0) {
+                        this._uploadService.makeFileRequest(this.url + 'publications/uploadImg/' + response.publication._id,
                     [], this.filesToUpload, this.token, 'image')
                     .then((result: any) => {
-                        this.publication.file = result.image;
-                        // reset array of files
-                        this.filesToUpload = [];
-
                         this.status = 'success';
                         // reset the form upon 
                         //successfully creating a publication !
+                        this.fileField.nativeElement.value = "";
+                        this.filesToUpload = [];
+                        form.reset();
+                        // Redirect and trigger event
+                        this._router.navigate(['/timeline']);
+                        this.sent.emit({send: 'true'});
+                    }).catch(err => {
+                        // there was an error
+                        this.status = 'error';
+                        this.onErrorMessage = err.message;
+                        // Reset the form
+                        this.fileField.nativeElement.value = "";
+                        this.filesToUpload = [];
+                        form.reset();
+                    });
+
+                    }else{     
+                        this.status = 'success';
+                        // reset the form upon 
+                        //successfully creating a publication without image
+                        // and redirect 
                         form.reset();
                         this._router.navigate(['/timeline']);
                         this.sent.emit({send: 'true'});
-                    });
-                      
+                    }
+                     
                 }else{
+                    // failed to publish a publication
                     this.status = 'error';
+                    this.onErrorMessage ="Failed to create a publication";
                 }
             },
             error => {
@@ -73,18 +93,32 @@ export class SidebarComponent implements OnInit{
                 console.log(errorMessage);
 
                 if(errorMessage != null){
-                    //this.onErrorMessage = errorMessage.error.message;
+                    this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
                 }
             }
-
         );
     }
 
     // method for uploading any file attached to a publication
     // use angular form event (change) to "capture" the files added on formfield type file
+    // then proceed to validate the file extension
     fileChangeEvent(fileInput: any){
         this.filesToUpload = <Array<File>>fileInput.target.files;
+        let file = this.filesToUpload[0];
+        let name = file.name.split('\.');
+        let extension = name[1];
+        // assuming that this file has any extension
+        if (extension === 'jpg' || extension === 'png' || extension === 'jpeg' || extension === 'gif') {
+            console.log('Good file extension!');
+          }
+          else {
+            // file extension is not allowed, then clean the input file field and array
+            fileInput.target.value = '';
+            this.onErrorMessage = 'Wrong file extension! Only jpg, png, gif and jpeg files';
+            this.status = 'error';
+            this.filesToUpload = [];
+          }
     }
 
     // Output

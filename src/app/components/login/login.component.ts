@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit{
     onSubmit(){
         this._userService.login(this.user).subscribe(
             response => {
-                console.log(response);
                 this.authenticatedUser = response;
                 if ( !this.authenticatedUser || !this.authenticatedUser.token){
                     this.responseStatus = 'error';

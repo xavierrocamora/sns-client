@@ -1,11 +1,15 @@
 /* GENERIC */
 .h1-strong {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: bold;
     margin-left: 13px;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eee;
+}
+
+#fixedNavBar {
+    position: fixed;
 }
 
 .active {
@@ -262,6 +266,11 @@
     color: #555;
 }
 
+#loadedFile {
+    color: blue;
+    height: 30px;
+}
+
 /* FOLLOWING */
 .followedUsers{
     min-height: 500px;
@@ -272,3 +281,82 @@
     min-height: 500px;
 }
 
+/* RECEIVED MESSAGES SECTION */
+.itemMessage .messageImage{
+    width: 75px;
+    height: 75px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.itemMessage .messageImage img{
+    width: 120px;
+}
+
+.itemMessage .userName{
+    margin-top: 10px;
+}
+
+.itemMessage .userName .userNickname{
+    color: #969393;
+}
+
+.itemMessage .userName .nameAndSurname{
+    color: #555;
+    font-weight: bold;
+}
+
+.defaultImage{
+    width: 100% !important;
+}
+
+#viewMessage {
+    margin-top: 30px !important;
+}
+
+.messageText {
+    margin-left: 5px;
+}
+
+.modal-header {
+    background-color:  #bd2020;
+    color: white;
+}
+
+.modal-header .button {
+    color: white !important;
+}
+
+.modal-content {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.modal-body .nameAndSurname {
+    font-weight: bold;
+}
+
+.modal-body .nameAndSurname .userNickname {
+    color: gray;
+    font-weight: bold;
+}
+
+.modal-body .nameAndSurname .date {
+    color:  #555;
+}
+
+.messageBody {
+    border: 1px solid #888;
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.modal-footer {
+    background-color: #888;
+}
+
+.sidebar-admin {
+    border: 1px solid #888;
+    border-radius: 10px;
+}
