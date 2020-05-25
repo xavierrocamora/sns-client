@@ -26,6 +26,9 @@ export class TimelineComponent implements OnInit{
     public publications: Publication[];
     public reachedEnd = false;
     public showImage;
+    public loading: boolean;
+    public onErrorMessage;
+    public hidden;
 
     constructor(
         private _route: ActivatedRoute,
@@ -42,9 +45,13 @@ export class TimelineComponent implements OnInit{
 
     ngOnInit(){
         console.log('Timeline component loaded...');
+        this.loading = true;
+        this.hidden = 'true';
         this.getPublications(this.page);
     }
 
+    // method to get all the publications from a given user and those from the users
+    // being followed
     getPublications(page, stackPublications = false){
         this._publicationService.getPublications(this.token, page).subscribe(
             response => {
@@ -71,6 +78,8 @@ export class TimelineComponent implements OnInit{
                     if(this.publications.length == (this.total)){
                         this.reachedEnd = true;
                     }
+                    this.status = 'success';
+                    this.loading = false;
                 }else{
                     this.status = 'error';
                 }   
@@ -80,8 +89,9 @@ export class TimelineComponent implements OnInit{
                 console.log(errorMessage);
 
                 if(errorMessage != null){
-                    //this.onErrorMessage = errorMessage.error.message;
+                    this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
+                    this.loading = false;
                 }
                 
             }
@@ -98,40 +108,19 @@ export class TimelineComponent implements OnInit{
         this.getPublications(this.page, true);
     }
 
+    // show last publications
     refresh(event){
-        this.getPublications(this.page);
+        this.getPublications(1);
     }
 
-    // pair of auxiliary functions to toggle showing/hiding an image from a publication
-    // TODO: at current only one image can be shown at a same time, make show multiple
-    showPublicationImage(id){
-        this.showImage = id;
-    }
-
-    hidePublicationImage(id){
-        // hide
-        this.showImage = 0;
-    }
-
-    // method to delete a specified publication
-    deletePublication(publicationId){
-        this._publicationService.deletePublication(this.token, publicationId).subscribe(
-            response =>{
-                // refresh the board
-                this.getPublications(this.page);
-            },
-            error => {
-                let errorMessage = <any>error;
-                console.log(errorMessage);
-
-                if(errorMessage != null){
-                    //this.onErrorMessage = errorMessage.error.message;
-                    this.status = 'error';
-                }
-            }
-
-        );
-
+    // refresh the publications upon successful deletion of a publication
+    publicationDeleted(event){
+        if (event.deleted == 'true'){
+            this.getPublications(1);
+        }else{
+            this.status = 'error';
+            this.onErrorMessage ="Publication could not be deleted"
+        }
     }
 
 }
