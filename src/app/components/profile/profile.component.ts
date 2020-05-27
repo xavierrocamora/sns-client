@@ -5,6 +5,7 @@ import { Follow } from '../../models/follow';
 import { UserService } from '../../services/user.service';
 import { FollowService } from '../../services/follow.service';
 import { GLOBAL } from '../../services/global';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
     selector: 'profile',
@@ -22,12 +23,14 @@ export class ProfileComponent implements OnInit{
     public url;
     public following;
     public followed;
+    public statCountersSubscription: any;
 
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService,
-        private _followService: FollowService
+        private _followService: FollowService,
+        private _sharedService: SharedService
     ){
         this.title = 'Profile';
         this.identity = this._userService.getIdentity();
@@ -35,11 +38,21 @@ export class ProfileComponent implements OnInit{
         this.url = GLOBAL.url;
         this.following = false;
         this.followed = false;
+        // start hearing from service for any change on statCounters
+        this.statCountersSubscription = this._sharedService.statCounters.subscribe((counters: object) => {
+            console.log('Counters: ', counters);
+            this.statCounters = counters; 
+        });
     }
 
     ngOnInit(){
         console.log('Profile component loaded...');
         this.loadPage();
+    }
+
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        this.statCountersSubscription.unsubscribe();
     }
 
     loadPage(){

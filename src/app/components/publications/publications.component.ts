@@ -25,7 +25,6 @@ export class PublicationsComponent implements OnInit{
     public itemsPerPage;
     public publications: Publication[];
     public reachedEnd = false;
-    public showImage;
 
     @Input() userId: string;
 
@@ -100,15 +99,15 @@ export class PublicationsComponent implements OnInit{
         this.getPublications(this.userId, this.page, true);
     }
 
-    // pair of auxiliary functions to toggle showing/hiding an image from a publication
-    // TODO: at current only one image can be shown at a same time, make show multiple
-    showPublicationImage(id){
-        this.showImage = id;
-    }
-
-    hidePublicationImage(id){
-        // hide
-        this.showImage = 0;
+    // refresh the publications upon successful deletion of a publication
+    publicationDeleted(event){
+        if (event.deleted == 'true'){
+            this.getPublications(this.userId, 1);
+            this.reachedEnd = false;
+        }else{
+            this.status = 'error';
+            //this.onErrorMessage ="Publication could not be deleted"
+        }
     }
 
 }

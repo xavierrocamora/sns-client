@@ -28,6 +28,7 @@ import { PublicationComponent} from './components/publication/publication.compon
 // Services
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
+import { SharedService } from './services/shared.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { UserGuard } from './services/user.guard';
   providers: [
     appRoutingProviders,
     UserService,
-    UserGuard
+    UserGuard,
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

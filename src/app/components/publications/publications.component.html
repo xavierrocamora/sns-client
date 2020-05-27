@@ -1,65 +1,7 @@
-<div id="publications">
+<div class="publications" >
     <div *ngFor="let publication of publications" class="item-publication">
-        <div class="panel panel-default">
-            <div class="panel-body">
-
-                <div class="userImage pull-left">
-                    <a href='#'>
-                        <img src="{{url + 'users/downloadImg/' + publication.user.image}}" 
-                        *ngIf="publication.user.image"/>
-                        <img src="assets/user.jpg" class="defaultImage" 
-                        *ngIf="!publication.user.image"/>
-                    </a>       
-                </div>
-
-                <div>
-                    <span class="userName">
-                        {{publication.user.name + ' ' + publication.user.surname}}
-                    </span>
-                    &nbsp;|&nbsp;
-                    <span class="date">
-                        {{ ( publication.created_at | amFromUnix ) | amTimeAgo }}
-
-                    </span>
-                </div>
-
-                <h4 class="publicationText pull-left">
-                    {{publication.text}}
-                </h4>
-
-                <!-- show/hide image button -->
-                <div class="col-lg-12" *ngIf="publication.file != ''">
-                    <!-- show -->
-                    <button 
-                        class="btn btn-warning pull-right"
-                        (click)="showPublicationImage(publication._id)"
-                        *ngIf="showImage != publication._id"
-                     >
-                        <span class="glyphicon glyphicon-picture"> </span>
-                    </button>
-                    <!-- hide -->
-                    <button 
-                        class="btn btn-danger pull-right"
-                        (click)="hidePublicationImage(publication._id)"
-                        *ngIf="showImage == publication._id"
-                     >
-                        <span class="glyphicon glyphicon-remove-circle"> </span>
-                    </button>
-                </div>
-                
-                <!-- attached image if any assigned -->
-                <div class="col-lg-12" *ngIf="publication.file != '' && showImage == publication._id">
-                    <img 
-                        class="col-lg-12"
-                        src="{{url + 'publications/downloadImg/' + publication.file}}" 
-                    />
-
-                </div>
-            </div>
-            
-        </div>
+        <publication [publication]="publication" (deleted)="publicationDeleted($event)" ></publication>
     </div>
-
 </div>
 
 <div class="lg-col-12 text-center">

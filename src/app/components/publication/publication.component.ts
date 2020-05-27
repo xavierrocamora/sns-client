@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Publication } from '../../models/publication';
 import { UserService } from '../../services/user.service';
 import { PublicationService } from '../../services/publication.service';
+import { SharedService } from '../../services/shared.service';
 import { GLOBAL } from '../../services/global';
 
 @Component({
@@ -27,7 +28,8 @@ export class PublicationComponent implements OnInit{
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService,
-        private _publicationService: PublicationService
+        private _publicationService: PublicationService,
+        private _sharedService: SharedService
     ){
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
@@ -53,7 +55,9 @@ export class PublicationComponent implements OnInit{
     deletePublication(){
         this._publicationService.deletePublication(this.token, this.publication._id).subscribe(
             response =>{
-                // refresh the board
+                // tell sidebar to update stat counters
+                this._sharedService.updateSignal.next('Publication ' + this.publication._id + ' deleted');
+                // and refresh the board
                 this.deleted.emit({ deleted: 'true' });
             },
             error => {
@@ -66,9 +70,7 @@ export class PublicationComponent implements OnInit{
                     this.status = 'error';
                 }
             }
-
         );
-
     }
 
 
