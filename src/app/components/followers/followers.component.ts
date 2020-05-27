@@ -28,11 +28,12 @@ export class FollowersComponent implements OnInit{
     public userPageId;
 
     // users followed by a specified user
-    // needed to determinate all users to be shown as followed by a specified user
+    // needed to determinate all users to be shown as following a specified user
     public users: User[];
 
     // array of ids users followed by the authenticated user
     // needed to determinate if authenticated user can follow/unfollow that user
+    // when creating a new user component in the view
     public followedUsers;
 
     // variable of type User, mainly needed to get the user's name in the page title
@@ -145,77 +146,4 @@ export class FollowersComponent implements OnInit{
         );
 
     }
-
-    // receive an user id
-    // send petition to start following that user
-    followUser(followed){
-        let follow = new Follow('', this.identity._id, followed);
-
-        this._followService.addFollow(this.token, follow).subscribe(
-            response => {
-                if(!response.follow.followedUser){
-                    this.status = 'error';
-                }else{
-                    this.status = 'success';
-                    // add user to followedUsers array
-                    this.followedUsers.push(response.follow.followedUser);
-                }
-            },
-            error => {
-                let errorMessage = <any>error;
-                console.log(errorMessage);
-
-                if(errorMessage != null){
-                    this.onErrorMessage = errorMessage.error.message;
-                    this.status = 'error';
-                }         
-            }
-        );
-
-    }
-
-
-     // receive an user id
-    // send petition to stop following that user
-    unfollowUser(followed){
-        
-        this._followService.deleteFollow(this.token, followed).subscribe(
-            response => {
-                if(!response){
-                    this.status = 'error';
-                }else{
-                    // try to delete user from followedUsers array
-                    let search = this.followedUsers.indexOf(followed);
-                    if (search != -1){
-                        this.followedUsers.splice(search, 1);
-                        this.status = 'success';
-                    }else{
-                        this.status = 'error';
-                    }     
-                }
-            },
-            error => {
-                let errorMessage = <any>error;
-                console.log(errorMessage);
-
-                if(errorMessage != null){
-                    this.onErrorMessage = errorMessage.error.message;
-                    this.status = 'error';
-                }         
-            }
-        );
-
-    }
-
-    // auxiliary variable and functions to determinate which kind of button must be shown
-    // when moving the mouse pointer over the button
-    public followUserOver;
-    mouseEnter(user_id){
-        this.followUserOver = user_id;
-    }
-    mouseLeave(user_id){
-        this.followUserOver = 0;
-    }
-
-
 }

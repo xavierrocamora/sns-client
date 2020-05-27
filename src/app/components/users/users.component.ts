@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { User } from '../../models/user';
-import { Follow } from '../../models/follow';
 import { UserService } from '../../services/user.service';
-import { FollowService } from '../../services/follow.service';
 import { GLOBAL } from '../../services/global';
 
 @Component({
     selector: 'users',
     templateUrl: './users.component.html',
-    providers: [UserService, FollowService]
+    providers: [UserService]
 })
 export class UsersComponent implements OnInit{
     public title: string;
@@ -29,8 +27,7 @@ export class UsersComponent implements OnInit{
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
-        private _userService: UserService,
-        private _followService: FollowService
+        private _userService: UserService
     ){
         this.title = 'Community';
         this.identity = this._userService.getIdentity();
@@ -97,77 +94,5 @@ export class UsersComponent implements OnInit{
             }
         );
     }
-
-    // receive an user id
-    // send petition to start following that user
-    followUser(followed){
-        let follow = new Follow('', this.identity._id, followed);
-
-        this._followService.addFollow(this.token, follow).subscribe(
-            response => {
-                if(!response.follow.followedUser){
-                    this.status = 'error';
-                }else{
-                    this.status = 'success';
-                    // add user to followedUsers array
-                    this.followedUsers.push(response.follow.followedUser);
-                }
-            },
-            error => {
-                let errorMessage = <any>error;
-                console.log(errorMessage);
-
-                if(errorMessage != null){
-                    this.onErrorMessage = errorMessage.error.message;
-                    this.status = 'error';
-                }         
-            }
-        );
-
-    }
-
-
-     // receive an user id
-    // send petition to stop following that user
-    unfollowUser(followed){
-        
-        this._followService.deleteFollow(this.token, followed).subscribe(
-            response => {
-                if(!response){
-                    this.status = 'error';
-                }else{
-                    // try to delete user from followedUsers array
-                    let search = this.followedUsers.indexOf(followed);
-                    if (search != -1){
-                        this.followedUsers.splice(search, 1);
-                        this.status = 'success';
-                    }else{
-                        this.status = 'error';
-                    }     
-                }
-            },
-            error => {
-                let errorMessage = <any>error;
-                console.log(errorMessage);
-
-                if(errorMessage != null){
-                    this.onErrorMessage = errorMessage.error.message;
-                    this.status = 'error';
-                }         
-            }
-        );
-
-    }
-
-    // auxiliary variable and functions to determinate which kind of button must be shown
-    // when moving the mouse pointer over the button
-    public followUserOver;
-    mouseEnter(user_id){
-        this.followUserOver = user_id;
-    }
-    mouseLeave(user_id){
-        this.followUserOver = 0;
-    }
-
 
 }
