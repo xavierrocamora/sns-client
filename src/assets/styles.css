@@ -20,6 +20,20 @@
     cursor: pointer;
 }
 
+.loadWindow {
+    height: 500px;
+}
+.loadWindow .loader {
+    width: 500px;
+    height: 500px;
+    margin: auto;
+}
+
+.loadWindow .loader img {
+    width: 50% !important; 
+}
+
+
 /* HEADER */
 .navigation {
     padding: 0px !important; 
@@ -191,11 +205,11 @@
 }
 
 /* TIMELINE */
-#publications{
+.publications{
     min-height: 500px;
 }
 
-#publications .date{
+.publications .date{
     color: gray;
 }
 

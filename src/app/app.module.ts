@@ -23,10 +23,12 @@ import { PublicationsComponent } from './components/publications/publications.co
 import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowersComponent } from './components/followers/followers.component';
+import { PublicationComponent} from './components/publication/publication.component';
 
 // Services
 import { UserService } from './services/user.service';
 import { UserGuard } from './services/user.guard';
+import { SharedService } from './services/shared.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { UserGuard } from './services/user.guard';
     PublicationsComponent,
     ProfileComponent,
     FollowingComponent,
-    FollowersComponent
+    FollowersComponent,
+    PublicationComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { UserGuard } from './services/user.guard';
   providers: [
     appRoutingProviders,
     UserService,
-    UserGuard
+    UserGuard,
+    SharedService
   ],
   bootstrap: [AppComponent]
 })

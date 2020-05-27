@@ -5,6 +5,7 @@ import { Publication } from '../../models/publication';
 import { PublicationService } from '../../services/publication.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UploadService } from '../../services/upload.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
     selector: 'sidebar',
@@ -20,19 +21,28 @@ export class SidebarComponent implements OnInit{
     public publication: Publication;
     public filesToUpload: Array<File>;
     public onErrorMessage: string;
+    public onSuccessMessage: string;
 
     constructor(
         private _route: ActivatedRoute,
         private _router: Router,
         private _userService: UserService,
         private _publicationService: PublicationService,
-        private _uploadService: UploadService
+        private _uploadService: UploadService,
+        private _sharedService: SharedService
     ){
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
-        this.statCounters = this._userService.getStoredCounters();
+        //this.statCounters = this._userService.getCounters();
+        this.getCounters();
         this.url = GLOBAL.url;
         this.publication = new Publication("", this.identity._id, "", "", "");
+        // start hearing for any signal (sent by a publication or user) 
+        // to update the stat counters.
+        this._sharedService.updateSignal.subscribe((message: string) => {
+            console.log('Message: ', message);
+            this.getCounters(); 
+        });
     }
 
     @ViewChild('myFileInputField') fileField: ElementRef;
@@ -43,7 +53,6 @@ export class SidebarComponent implements OnInit{
 
     // method for sending a petition to create a new publication
     onSubmit(form, $event){
-        console.log('before sending ', this.publication);
         this._publicationService.addPublication(this.token, this.publication).subscribe(
             response => {
                 if(response.publication){
@@ -54,6 +63,8 @@ export class SidebarComponent implements OnInit{
                     [], this.filesToUpload, this.token, 'image')
                     .then((result: any) => {
                         this.status = 'success';
+                        this.onSuccessMessage = 'Publication successfully created';
+                        this.getCounters();
                         // reset the form upon 
                         //successfully creating a publication !
                         this.fileField.nativeElement.value = "";
@@ -74,6 +85,8 @@ export class SidebarComponent implements OnInit{
 
                     }else{     
                         this.status = 'success';
+                        this.onSuccessMessage = 'Publication successfully created';
+                        this.getCounters();
                         // reset the form upon 
                         //successfully creating a publication without image
                         // and redirect 
@@ -127,5 +140,26 @@ export class SidebarComponent implements OnInit{
     // that a new publication was done
     sendPublication(event){
         this.sent.emit({send: 'true'});
+    }
+
+    // get statistic counters for the user
+    getCounters(){
+        this._userService.getCounters().subscribe(
+            response => {
+                this.statCounters = response;
+                // publicate new statCounters into service so that profile can get them
+                this._sharedService.statCounters.next(this.statCounters);
+                //this.status = 'success';
+                //this.onSuccessMessage = 'Publication has been deleted';
+            },
+            error => {
+                let errorMessage = <any>error;
+
+                if(errorMessage != null){
+                    //this.onErrorMessage = 'Publication could not be deleted';
+                    this.status = 'error';
+                }
+            }
+        );
     }
 }
