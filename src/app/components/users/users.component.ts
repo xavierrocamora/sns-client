@@ -23,6 +23,7 @@ export class UsersComponent implements OnInit{
     public total;
     public url;
     public followedUsers;
+    public loading: boolean;
 
     constructor(
         private _route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class UsersComponent implements OnInit{
 
     ngOnInit(){
         console.log('Users component loaded...');
+        this.loading = true;
         this.currentPage();
     }
 
@@ -72,6 +74,7 @@ export class UsersComponent implements OnInit{
             response => {
                 if(!response.users){
                     this.status = 'error';
+                    this.loading = false;
                 }else{
                     this.total = response.total;
                     this.users = response.users;
@@ -80,6 +83,7 @@ export class UsersComponent implements OnInit{
                     if(page > response.pages){
                         this._router.navigate(['/community',1]);
                     }
+                    this.loading = false;
                 }
             },
             error => {
@@ -89,6 +93,7 @@ export class UsersComponent implements OnInit{
                 if(errorMessage != null){
                     this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
+                    this.loading = false;
                 }
                 
             }

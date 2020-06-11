@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit{
 
     // Log user and get user data
     onSubmit(){
+        this.responseStatus = 'loading';
         this._userService.login(this.user).subscribe(
             response => {
                 this.authenticatedUser = response;

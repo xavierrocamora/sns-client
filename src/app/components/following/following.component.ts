@@ -22,6 +22,7 @@ export class FollowingComponent implements OnInit{
     public pages;
     public total;
     public url;
+    public loading: boolean;
      
     // id of the user whose page of users being followed by him/her must be shown
     public userPageId;
@@ -52,6 +53,7 @@ export class FollowingComponent implements OnInit{
 
     ngOnInit(){
         console.log('Follows component loaded...');
+        this.loading = true;
         this.currentPage();
     }
 
@@ -90,6 +92,7 @@ export class FollowingComponent implements OnInit{
             response => {
                 if(!response.follows){
                     this.status = 'error';
+                    this.loading = false;
                 }else{
                     this.total = response.total;
                     this.pages = response.pages;
@@ -105,6 +108,7 @@ export class FollowingComponent implements OnInit{
                     if(page > response.pages){
                         this._router.navigate(['/following',userId, 1]);
                     }
+                    this.loading = false;
                 }
             },
             error => {
@@ -114,6 +118,7 @@ export class FollowingComponent implements OnInit{
                 if(errorMessage != null){
                     this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
+                    this.loading = false;
                 }
                 
             }
@@ -141,6 +146,7 @@ export class FollowingComponent implements OnInit{
                 if(errorMessage != null){
                     this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
+                    this.loading = false;
                 }         
             }
         );

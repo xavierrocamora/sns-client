@@ -39,18 +39,17 @@ export class RegisterComponent implements OnInit{
     }
 
     onSubmit(registerForm){
+        this.responseStatus = 'loading';
         this._userService.register(this.user).subscribe(
             response => {
-                console.log(response);
+
                 if (response.user && response.user._id){
-                    console.log(response.user);
                     this.responseStatus = 'success';
                     registerForm.reset();
                 }else{
-                    this.onErrorMessage = 'Could not register user!'
+                    this.onErrorMessage = 'Could not register user!';
                     this.responseStatus = 'error';
-                }
-                
+                }                
             },
             error => {
                 let errorMessage = <any>error;

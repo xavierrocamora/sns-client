@@ -82,6 +82,7 @@ export class TimelineComponent implements OnInit{
                     this.loading = false;
                 }else{
                     this.status = 'error';
+                    this.loading = false;
                 }   
             },
             error => {

@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-4">
+<div class="col-sm-4 col-sm-offset-4 loginForm">
     <h1 class="h1-strong">{{title}}</h1>
 
     <div class="alert alert-success" *ngIf="responseStatus == 'success'">
@@ -9,26 +9,44 @@
         {{onErrorMessage}} 
     </div>
 
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-12">
-        <p>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-12 well well-lg">
+        
             <label>Email</label>
-            <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
             class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
-            <span *ngIf="!email.valid && email.touched">
-                A valid email format is required!
-            </span>
-        </p>
-
-        <p>
+            </div>
+            <p class="text-warning">
+                <span *ngIf="!email.valid && email.touched">
+                    A valid email format is required!
+                </span>
+            </p>
+            
             <label>Password</label>
-            <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
             class="form-control" required />
-            <span *ngIf="!password.valid && password.touched">
-                Password is missing!
-            </span>
-        </p>
-
-        <input type="submit" value="Log in" class="btn btn-success btn-block"
-        [disabled]="!loginForm.form.valid" />
+            </div>
+            
+            <p class="text-warning">
+                <span *ngIf="!password.valid && password.touched">
+                    Password is missing!
+                </span>
+            </p>
+            
+        
+            <p>
+                <input type="submit" value="Sign up" class="btn btn-success btn-block"
+        [disabled]="!loginForm.form.valid || responseStatus == 'loading'" />
+            </p>
+        
     </form>
+    <div class="text-center">
+        Do not have an account yet? 
+        <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+            Register here
+        </a>
+    </div>
 </div>

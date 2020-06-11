@@ -1,4 +1,4 @@
-<div class="col-lg-8">
+<div class="col-lg-8" *ngIf="!loading">
     <h1 class="h1-strong">{{title}} {{user.name}}</h1>
 
     <div class="followerUsers">
@@ -13,13 +13,19 @@
             <li *ngIf="page > 1">
                 <a [routerLink]="['/followers', userPageId, prevPage]">Previous</a>
             </li>
-            <li *ngIf="pages != page">
+            <li *ngIf="pages != page && pages != 0">
                 <a [routerLink]="['/followers', userPageId, nextPage]">Next</a>
             </li>
         </ul>
     </div>
     
 </div>
+
+<!-- Loading bar -->
+<div class="col-lg-8 loadWindow" *ngIf="loading">
+    <div class="loader"></div>   
+</div>
+
 <sidebar></sidebar>
 <!-- clear the floating so that sidebar is rendered in the lateral instead of bottom -->
 <div class="clearfix"></div>

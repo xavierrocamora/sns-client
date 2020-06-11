@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-4">
+<div class="col-sm-4 col-sm-offset-4">
     <h1 class="h1-strong">{{title}}</h1>
 
     <div class="alert alert-success" *ngIf="responseStatus == 'success'">
@@ -10,12 +10,12 @@
         please try it again. 
     </div>
 
-    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-md-12">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" class="col-md-12 well well-lg">
         <p>
             <label>Name</label>
             <input type="text" name="name" #name="ngModel" [(ngModel)]="user.name"
             class="form-control" required />
-            <span *ngIf="!name.valid && name.touched">
+            <span class="text-warning" *ngIf="!name.valid && name.touched">
                 A name is required!
             </span>
         </p>
@@ -24,7 +24,7 @@
             <label>Surname</label>
             <input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname"
             class="form-control" required />
-            <span *ngIf="!surname.valid && surname.touched">
+            <span class="text-warning" *ngIf="!surname.valid && surname.touched">
                 A surname is required!
             </span>
         </p>
@@ -33,7 +33,7 @@
             <label>Nickname</label>
             <input type="text" name="nickname" #nickname="ngModel" [(ngModel)]="user.nickname"
             class="form-control" required />
-            <span *ngIf="!nickname.valid && nickname.touched">
+            <span class="text-warning" *ngIf="!nickname.valid && nickname.touched">
                 A nickname is required!
             </span>
         </p>
@@ -42,7 +42,7 @@
             <label>Email</label>
             <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
             class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
-            <span *ngIf="!email.valid && email.touched">
+            <span class="text-warning" *ngIf="!email.valid && email.touched">
                 A valid email format is required!
             </span>
         </p>
@@ -51,13 +51,21 @@
             <label>Password</label>
             <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
             class="form-control" required />
-            <span *ngIf="!password.valid && password.touched">
+            <span class="text-warning" *ngIf="!password.valid && password.touched">
                 A password for your account is required!
             </span>
         </p>
 
         <input type="submit" value="{{title}}" class="btn btn-success btn-block" 
-        [disabled]="!registerForm.form.valid" />
+        [disabled]="!registerForm.form.valid || responseStatus == 'loading'" />
 
     </form>
+    <div class="text-center">
+        <p>
+            Already have an account? You can
+            <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+                sign up here
+            </a>
+        </p>  
+    </div>
 </div>
