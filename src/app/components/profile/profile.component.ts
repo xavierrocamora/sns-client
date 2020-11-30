@@ -39,9 +39,11 @@ export class ProfileComponent implements OnInit{
         this.following = false;
         this.followed = false;
         // start hearing from service for any change on statCounters
-        this.statCountersSubscription = this._sharedService.statCounters.subscribe((counters: object) => {
-            console.log('Counters: ', counters);
-            this.statCounters = counters; 
+        this.statCountersSubscription = this._sharedService.updateSignal.subscribe((message: string) => {
+            //console.log('Counters: ', counters);
+            console.log('Message: ' + message );
+            //this.statCounters = counters;
+            this.getCounters(this.user._id); 
         });
     }
 
@@ -136,6 +138,8 @@ export class ProfileComponent implements OnInit{
                     this.status = 'success';
                     // set value for flag following
                     this.following = true;
+                    // tell sidebar to update stat counters
+                    this._sharedService.updateSignal.next('User ' + this.user._id + ' started being followed by ' + this.identity._id);
                 }
             },
             error => {
@@ -160,7 +164,9 @@ export class ProfileComponent implements OnInit{
                     this.status = 'error';
                 }else{
                     this.following = false;
-                    this.status = 'success';    
+                    this.status = 'success';
+                    // tell sidebar to update stat counters
+                    this._sharedService.updateSignal.next('User ' + this.user._id + ' stopped being followed by ' + this.identity._id);    
                 }
             },
             error => {

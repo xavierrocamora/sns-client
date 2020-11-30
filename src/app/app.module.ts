@@ -24,6 +24,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FollowingComponent } from './components/following/following.component';
 import { FollowersComponent } from './components/followers/followers.component';
 import { PublicationComponent} from './components/publication/publication.component';
+import { UserComponent } from './components/user/user.component';
 
 // Services
 import { UserService } from './services/user.service';
@@ -44,7 +45,8 @@ import { SharedService } from './services/shared.service';
     ProfileComponent,
     FollowingComponent,
     FollowersComponent,
-    PublicationComponent
+    PublicationComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

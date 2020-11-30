@@ -25,7 +25,7 @@ export class ReceivedComponent implements OnInit{
     public nextPage;
     public total;
     public pages;
-    public hidden = true;
+    public loading: boolean;
 
     constructor(
         private _route: ActivatedRoute,
@@ -42,6 +42,7 @@ export class ReceivedComponent implements OnInit{
 
     ngOnInit(){
         console.log('received component loaded');
+        this.loading = true;
         this.currentPage();
     }
 
@@ -77,10 +78,12 @@ export class ReceivedComponent implements OnInit{
             response => {
                 if (!response.messages){
                     this.status = 'error';
+                    this.loading = false;
                 }else{
                     this.total = response.total;
                     this.pages = response.pages;
-                    this.messages = response.messages;       
+                    this.messages = response.messages;
+                    this.loading = false;       
                 }
             },
             error => {
@@ -90,6 +93,7 @@ export class ReceivedComponent implements OnInit{
                 if(errorMessage != null){
                     //this.onErrorMessage = errorMessage.error.message;
                     this.status = 'error';
+                    this.loading = false;
                 }
                 
             }

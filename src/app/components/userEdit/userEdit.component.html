@@ -56,7 +56,7 @@
             <input type="file" placeholder="Upload an image" (change)= "onFileChange($event)" />
         </p>
 
-        <input type="submit" value="{{title}}" class="btn btn-warning" 
-        [disabled]="!userEditForm.form.valid" />
+        <input type="submit" value="{{title}}" class="btn btn-warning btn-block" 
+        [disabled]="!userEditForm.form.valid || status == 'loading'" />
     </form>
 </div>

@@ -23,10 +23,8 @@
 
 </div>
 
-<div class="loadWindow" class="col-lg-8" *ngIf="loading">
-    <div class="loader">
-        <img id="loading" src="assets/loading.gif" class="defaultImage"/>
-    </div>   
+<div class="col-lg-8 loadWindow" *ngIf="loading">
+    <div class="loader"></div>   
 </div>
 
 <div class="alert alert-danger" *ngIf="status == 'error'">

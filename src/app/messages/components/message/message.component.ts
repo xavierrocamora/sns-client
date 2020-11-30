@@ -34,8 +34,7 @@ export class MessageComponent implements OnInit{
 
 
     ngOnInit(){
-        console.log('message ' + this.message._id + 'component loaded');
-        console.log(this.message);
+        //console.log('message ' + this.message._id + 'component loaded');
         console.log(this.mode);
     }
 

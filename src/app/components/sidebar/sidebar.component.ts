@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit{
     public filesToUpload: Array<File>;
     public onErrorMessage: string;
     public onSuccessMessage: string;
+    public updateSignalSubscription: any;
 
     constructor(
         private _route: ActivatedRoute,
@@ -33,13 +34,12 @@ export class SidebarComponent implements OnInit{
     ){
         this.identity = this._userService.getIdentity();
         this.token = this._userService.getToken();
-        //this.statCounters = this._userService.getCounters();
         this.getCounters();
         this.url = GLOBAL.url;
         this.publication = new Publication("", this.identity._id, "", "", "");
         // start hearing for any signal (sent by a publication or user) 
         // to update the stat counters.
-        this._sharedService.updateSignal.subscribe((message: string) => {
+        this.updateSignalSubscription = this._sharedService.updateSignal.subscribe((message: string) => {
             console.log('Message: ', message);
             this.getCounters(); 
         });
@@ -49,6 +49,15 @@ export class SidebarComponent implements OnInit{
 
     ngOnInit(){
         console.log("Sidebar component loaded...");
+    }
+
+    ngOnDestroy() {
+        // prevent memory leak when component is destroyed
+        // REALLY IMPORTANT
+        // otherwise signals from other instances of sidebar start stacking
+        // each time a component emits a new signal
+        // and are sent all at once
+        this.updateSignalSubscription.unsubscribe();
     }
 
     // method for sending a petition to create a new publication
@@ -148,7 +157,7 @@ export class SidebarComponent implements OnInit{
             response => {
                 this.statCounters = response;
                 // publicate new statCounters into service so that profile can get them
-                this._sharedService.statCounters.next(this.statCounters);
+                //this._sharedService.statCounters.next(this.statCounters);
                 //this.status = 'success';
                 //this.onSuccessMessage = 'Publication has been deleted';
             },

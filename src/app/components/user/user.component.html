@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="userImage pull-left">
+            <img src="{{url + 'users/downloadImg/' + user.image}}" *ngIf="user.image"/>
+            <img src="assets/user.jpg" class="defaultImage" *ngIf="!user.image"/>
+        </div>
+        <div class="userName pull-left">
+            <p class="nameAndSurname">
+                <a [routerLink]="['/profile', user._id]">
+                    {{user.name + ' ' + user.surname}}
+                </a>
+            </p>
+            <p class="userNickname">
+                {{user.nickname}}
+            </p>
+        </div>
+        <!-- follow / stop following -->
+        <div class="pull-right" *ngIf="user._id != identity._id">
+            <button class="btn btn-success" *ngIf="!followedUser"
+            (click)="followUser(user._id)"
+            >
+                <span class="glyphicon glyphicon-plus-sign"></span>
+                Follow user
+            </button>
+           
+            <button class="btn btn-primary" 
+            *ngIf="followedUser"
+            (mouseenter)="mouseEnter()"
+            (mouseleave)="mouseLeave()"
+            (click)="unfollowUser(user._id)"
+            [class.btn-danger]="followUserOver == true"
+            >
+                <span *ngIf="followUserOver == true; else following">
+                    <span class="glyphicon glyphicon-minus-sign"></span>
+                    Stop following
+                </span>
+                <ng-template #following>
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                    Following
+                </ng-template>  
+            </button>
+        </div>
+    </div> 
+</div>

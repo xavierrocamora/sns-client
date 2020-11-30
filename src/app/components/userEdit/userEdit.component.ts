@@ -39,6 +39,7 @@ export class UserEditComponent implements OnInit{
     }
 
     onSubmit(){
+        this.status = 'loading';
         this._userService.updateUser(this.user).subscribe(
             response => {
                 if(!response.user){

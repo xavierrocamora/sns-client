@@ -1,54 +1,11 @@
-<div class="col-lg-8">
+<div class="col-lg-8" *ngIf="!loading">
     <h1 class="h1-strong">{{title}} {{user.name}}</h1>
 
     <div class="followedUsers">
 
         <!-- Listing followed Users -->
         <div *ngFor="let user of users" class="itemUser">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="userImage pull-left">
-                        <img src="{{url + 'users/downloadImg/' + user.image}}" *ngIf="user.image"/>
-                        <img src="assets/user.jpg" class="defaultImage" *ngIf="!user.image"/>
-                    </div>
-                    <div class="userName pull-left">
-                        <p class="nameAndSurname">
-                            <a [routerLink]="['/profile', user._id]">
-                                {{user.name + ' ' + user.surname}}
-                            </a>
-                        </p>
-                        <p class="userNickname">
-                            {{user.nickname}}
-                        </p>
-                    </div>
-                    <!-- follow / stop following -->
-                    <div class="pull-right" *ngIf="user._id != identity._id">
-                        <button class="btn btn-success" *ngIf="followedUsers.indexOf(user._id) < 0"
-                        (click)="followUser(user._id)"
-                        >
-                            <span class="glyphicon glyphicon-plus-sign"></span>
-                            Follow user
-                        </button>
-                       
-                        <button class="btn btn-primary" 
-                        *ngIf="followedUsers.indexOf(user._id) >= 0"
-                        (mouseenter)="mouseEnter(user._id)"
-                        (mouseleave)="mouseLeave(user._id)"
-                        (click)="unfollowUser(user._id)"
-                        [class.btn-danger]="user._id == followUserOver"
-                        >
-                            <span *ngIf="user._id == followUserOver; else following">
-                                <span class="glyphicon glyphicon-minus-sign"></span>
-                                Stop following
-                            </span>
-                            <ng-template #following>
-                                <span class="glyphicon glyphicon-ok-sign"></span>
-                                Following
-                            </ng-template>  
-                        </button>
-                    </div>
-                </div> 
-            </div>
+            <user [user]="user" [followedUser]="followedUsers.indexOf(user._id) < 0 ? false : true"></user>
         </div>
 
         <!-- Paginated Navigation -->
@@ -56,13 +13,19 @@
             <li *ngIf="page > 1">
                 <a [routerLink]="['/following', userPageId, prevPage]">Previous</a>
             </li>
-            <li *ngIf="pages != page">
+            <li *ngIf="pages != page && pages != 0">
                 <a [routerLink]="['/following', userPageId, nextPage]">Next</a>
             </li>
         </ul>
     </div>
     
 </div>
+
+<!-- Loading bar -->
+<div class="col-lg-8 loadWindow" *ngIf="loading">
+    <div class="loader"></div>   
+</div>
+
 <sidebar></sidebar>
 <!-- clear the floating so that sidebar is rendered in the lateral instead of bottom -->
 <div class="clearfix"></div>

@@ -1,95 +1,104 @@
 <div class="navigation col-lg-12">
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       
       <div class="navbar-header">
         <a href="#" class="navbar-brand">{{title}}</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+      </div>
+      <!-- Collapsible menu for small devices -->
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav" *ngIf="identity">
+          <li>
+            <a [routerLink]="['/home']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-home"></span>
+              Start
+            </a>
+          </li>
+  
+          <li>
+            <a [routerLink]="['/timeline']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-th-list"></span>
+              Timeline
+            </a>
+          </li>
+  
+          <li>
+            <a [routerLink]="['/community']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+              Community
+            </a>
+          </li>
+  
+          <li>
+            <a [routerLink]="['/messages/received']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-envelope"></span>
+              Messages
+            </a>
+          </li>
+        </ul>
+
+        <!-- right navbar area Login/register || logged user data -->
+        <ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">
+          <li>
+            <a [routerLink]="['/login']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-log-in"></span>
+              Login
+            </a>
+          </li>
+  
+          <li>
+            <a [routerLink]="['/register']" [routerLinkActive]="['active']">
+              <span class="glyphicon glyphicon-user"></span>
+              Register
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" *ngIf="identity">
+          <li class="avatar">
+            <!-- load user's image-->
+            <img src="{{url + 'users/downloadImg/' + identity.image}}" *ngIf="identity && identity.image" />
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              {{identity.name}} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a [routerLink]="['/profile', identity._id]">
+                  <span class="glyphicon glyphicon-user"></span>
+                  My profile
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/editProfile']" [routerLinkActive]="['active']">
+                  <span class="glyphicon glyphicon-cog"></span>
+                  Edit my data
+                </a>
+              </li>
+              <li>
+                <a class="pointer" (click)="logout()">
+                  <span class="glyphicon glyphicon-log-out"></span>
+                  Close session
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
 
       </div>
-
-      <ul class="nav navbar-nav" *ngIf="identity">
-        <li>
-          <a [routerLink]="['/home']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-home"></span>
-            Start
-          </a>
-        </li>
-
-        <li>
-          <a [routerLink]="['/timeline']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-th-list"></span>
-            Timeline
-          </a>
-        </li>
-
-        <li>
-          <a [routerLink]="['/community']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-user"></span>
-            Community
-          </a>
-        </li>
-
-        <li>
-          <a [routerLink]="['/messages/received']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-envelope"></span>
-            Messages
-          </a>
-        </li>
-
-      </ul>
-
-      <ul class="nav navbar navbar-nav navbar-right" *ngIf="!identity">
-        <li>
-          <a [routerLink]="['/login']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-log-in"></span>
-            Login
-          </a>
-        </li>
-
-        <li>
-          <a [routerLink]="['/register']" [routerLinkActive]="['active']">
-            <span class="glyphicon glyphicon-user"></span>
-            Register
-          </a>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right" *ngIf="identity">
-        <li class="avatar">
-          <!-- load user's image-->
-          <img src="{{url + 'users/downloadImg/' + identity.image}}" *ngIf="identity && identity.image" />
-        </li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            {{identity.name}} <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a [routerLink]="['/profile', identity._id]">
-                <span class="glyphicon glyphicon-user"></span>
-                My profile
-              </a>
-            </li>
-            <li>
-              <a [routerLink]="['/editProfile']" [routerLinkActive]="['active']">
-                <span class="glyphicon glyphicon-cog"></span>
-                Edit my data
-              </a>
-            </li>
-            <li>
-              <a class="pointer" (click)="logout()">
-                <span class="glyphicon glyphicon-log-out"></span>
-                Close session
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-
-
 
     </div>
   </nav>
 </div>
 
-<router-outlet></router-outlet>
+<div class="container-fluid" style="margin-top:50px">
+  <router-outlet></router-outlet>
+</div>
+
+

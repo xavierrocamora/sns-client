@@ -21,7 +21,7 @@
                     {{follower.user.name + ' ' + follower.user.surname + '(' + follower.user.nickname + ')'}}
                 </option>
             </select>
-
+            
         </p>
 
         <p>
@@ -33,6 +33,7 @@
             </span>
         </p>
 
-        <input type="submit" value="{{title}}" class="btn btn-success" />
+        <input type="submit" value="{{title}}" class="btn btn-success btn-block"
+        [disabled]="!formAdd.form.valid || status == 'loading'"  />
     </form>
 </div>
