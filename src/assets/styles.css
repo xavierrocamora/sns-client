@@ -1,399 +1,425 @@
 /* GENERIC */
 .h1-strong {
-    font-size: 30px;
-    font-weight: bold;
-    margin-left: 13px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 13px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
 
 #fixedNavBar {
-    position: fixed;
+  position: fixed;
 }
 
 .active {
-    background: #9c1111;
+  background: #9c1111;
 }
 
-.pointer{
-    cursor: pointer;
+.pointer {
+  cursor: pointer;
 }
 
 /* LOADER */
 .loadWindow {
-    height: 500px;
-    background-color: #f3f3f3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 500px;
+  background-color: #f3f3f3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .loadWindow .loader {
-    border: 16px solid #ccffcc; 
-    border-top: 16px solid #00e600; 
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-.loadWindow .loader img {
-    width: 50% !important; 
+  border: 16px solid #ccffcc;
+  border-top: 16px solid #00e600;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadWindow .loader img {
+  width: 50% !important;
+}
 
 /* HEADER */
 .navigation {
-    padding: 0px !important; 
+  padding: 0px !important;
 }
 
 .navigation .navbar {
-    border-radius: 0px !important;
-    background: #bd2020 !important;
-    border: none;  
+  border-radius: 0px !important;
+  background: #bd2020 !important;
+  border: none;
 }
 
-.navigation .navbar *{
-    color: white !important;
+.navigation .navbar * {
+  color: white !important;
 }
 
-.navigation .navbar a:hover{
-    background: #9c1111 !important;
+.navigation .navbar a:hover {
+  background: #9c1111 !important;
 }
 
-.navigation .navbar .dropdown-menu *{
-    color: black !important;
+.navigation .navbar .dropdown-menu * {
+  color: black !important;
 }
 
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus{
-    background: #9c1111 !important;
-} 
-
-.navigation .navbar .dropdown-menu a:hover{
-    background: #eee !important;
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: #9c1111 !important;
 }
 
-.navigation .avatar{
-    width: 35px;
-    height: 35px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-top: 9px;
-    margin-right: 2px;
+.navigation .navbar .dropdown-menu a:hover {
+  background: #eee !important;
 }
 
-.navigation .avatar img{
-    height: auto;
-    width: 38px;
+.navigation .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 9px;
+  margin-right: 2px;
 }
 
-.jumbotron{
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
+.navigation .avatar img {
+  height: auto;
+  width: 38px;
+}
+
+.jumbotron {
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 /* LOGIN AND REGISTER SECTIONS */
 .loginForm form p .btn {
-    margin-top: 10px !important;
+  margin-top: 10px !important;
 }
 
 /* COMMUNITY SECTION */
-.itemUser .userImage{
-    width: 75px;
-    height: 75px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-right: 15px;
+.itemUser .userImage {
+  width: 75px;
+  height: 75px;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-right: 15px;
 }
 
-.itemUser .userImage img{
-    width: 120px;
+.itemUser .userImage img {
+  width: 120px;
 }
 
-.itemUser .userName{
-    margin-top: 10px;
+.itemUser .userName {
+  margin-top: 10px;
 }
 
-.itemUser .userName .userNickname{
-    color: #969393;
+.itemUser .userName .userNickname {
+  color: #969393;
 }
 
-.itemUser .userName .nameAndSurname{
-    color: #555;
-    font-weight: bold;
+.itemUser .userName .nameAndSurname {
+  color: #555;
+  font-weight: bold;
 }
 
-.defaultImage{
-    width: 100% !important;
+.defaultImage {
+  width: 100% !important;
 }
 
 /* SIDEBAR */
 
-.sidebar-32{
-    width: 32% !important;
-    padding: 0px !important;
+.flex-sidebar {
+  display: flex !important;
+  flex-direction: column;
 }
 
-#userCard, #newPublication{
-    padding: 25px;
-    width: 32%;
+.sidebar-32 {
+  width: 32% !important;
+  padding: 0px !important;
 }
 
-#newPublication{
-    padding: 18px;
-    padding-left: 10px;
+#userCard,
+#newPublication {
+  padding: 25px;
 }
 
-#userCard .avatar{
-    width: 75px;
-    height: 75px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-right: 15px;
+#newPublication {
+  padding: 18px;
+  padding-left: 10px;
 }
 
-#userCard .avatar img{
-    width: 100%;
+#userCard .avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-right: 15px;
 }
 
-#userCard .nameAndSurname .username{
-    font-weight: 300;
-    font-size: 17px;
+#userCard .avatar img {
+  width: 100%;
 }
 
-#userCard .nameAndSurname a{
-    color: #555;
+#userCard .nameAndSurname .username {
+  font-weight: 300;
+  font-size: 17px;
 }
 
-#userCard .nameAndSurname .nickname{
-    color: #969393;
+#userCard .nameAndSurname a {
+  color: #555;
 }
 
-#userCard .statCounters{
-    border-top: 1px solid #eee;
-    margin-top: 10px;
+#userCard .nameAndSurname .nickname {
+  color: #969393;
 }
 
-#userCard .statCounters a{
-    text-decoration: none;
+#userCard .statCounters {
+  border-top: 1px solid #eee;
+  margin-top: 10px;
 }
 
-#userCard .statCounters a:hover .dataCounters{
-    color: #cc1717;
+#userCard .statCounters a {
+  text-decoration: none;
+}
+
+#userCard .statCounters a:hover .dataCounters {
+  color: #cc1717;
 }
 
 #userCard .labelCounters,
-#userCard .dataCounters{
-    display: block;
-    text-align: center;
-    transition: all 300ms;
+#userCard .dataCounters {
+  display: block;
+  text-align: center;
+  transition: all 300ms;
 }
 
-#userCard .labelCounters{
-    font-weight: bold;
-    color: #555;
+#userCard .labelCounters {
+  font-weight: bold;
+  color: #555;
 }
 
-#userCard .dataCounters{
-    font-weight: bold;
-    color: green;
+#userCard .dataCounters {
+  font-weight: bold;
+  color: green;
 }
 
-#userCard .userStatCounter{
-    float: left;
-    padding-left: 18px;
-    padding-right: 18px;
-    margin-top: 10px;
-    border-right: 2px solid #eee; 
+#userCard .userStatCounter {
+  float: left;
+  padding-left: 18px;
+  padding-right: 18px;
+  margin-top: 10px;
+  border-right: 2px solid #eee;
 }
 
-#userCard .userStatCounter:first-child{
-    padding-left: 6px;
+#userCard .userStatCounter:first-child {
+  padding-left: 6px;
 }
 
 /* don't show last sepparation bar at the right */
-#userCard .userStatCounter:last-child{
-    border: none;
+#userCard .userStatCounter:last-child {
+  border: none;
 }
 
 /* TIMELINE */
-.publications{
-    min-height: 500px;
+.publications {
+  min-height: 500px;
 }
 
-.publications .date{
-    color: gray;
+.publications .date {
+  color: gray;
 }
 
-.item-publication .userImage{
-    width: 75px;
-    height: 75px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-right: 15px;
+.item-publication .userImage {
+  float: left;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 15px;
 }
 
-.item-publication .userImage img{
-    width: 120px;
+.item-publication .userImage img {
+  width: 75px;
 }
 
-.item-publication .userName{
-    margin-top: 10px;
+.item-publication .userName {
+  margin-top: 10px;
+}
+
+.item-publication .flexboxPubliButtons {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.item-publication .flexboxPubliButtons .btn {
+  margin: 2px;
 }
 
 /* COMMUNITY USERS */
 .communityUsers {
-    min-height: 500px;
+  min-height: 500px;
 }
 
 /*PROFILES*/
-#dataProfile{
-    min-height: 240px;
-    text-align: center;
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
-#dataProfile .userImage{
-    width: 185px;
-    height: 185px;
-    border-radius: 400px;
-    overflow: hidden;
-    margin-right: 15px; 
+#dataProfile {
+  min-height: 240px;
+  text-align: center;
 }
 
-#dataProfile .userImage img{
-    width: 100%;
+#dataProfile .userImage {
+  width: 185px;
+  height: 185px;
+  border-radius: 400px;
+  overflow: hidden;
+  margin-right: 15px;
 }
 
-#dataProfile .userName{
-    margin-top: 15px;
+#dataProfile .userImage img {
+  width: 100%;
 }
 
-#dataProfile .userName .label{
-    margin-bottom: 15px;
+#dataProfile .userName {
+  margin-top: 15px;
 }
 
-#dataProfile .userName .name{
-    font-size: 24px;
-    font-weight: bold;
-    color: #555
+#dataProfile .userName .label {
+  margin-bottom: 15px;
 }
 
-#dataProfile .userName .nickname{
-    font-size: 19px;
-    font-weight: bold;
-    color: gray;
+#dataProfile .userName .name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
 }
 
-#dataProfile .statCounters{
-    border-left: 4px solid #ccc;
-    margin-left: 35px;
-    padding-left: 25px;
-    height: 180px;
+#dataProfile .userName .nickname {
+  font-size: 19px;
+  font-weight: bold;
+  color: gray;
 }
 
-#dataProfile .statCounters a{
-    font-size: 20px;
-    line-height: 35px;
-    color: #555;
+#dataProfile .statCounters {
+  border-left: 4px solid #ccc;
+  margin-left: 35px;
+  padding-left: 25px;
+  height: 180px;
+}
+
+#dataProfile .statCounters a {
+  font-size: 20px;
+  line-height: 35px;
+  color: #555;
 }
 
 #loadedFile {
-    color: blue;
-    height: 30px;
+  color: blue;
+  height: 30px;
 }
 
 /* FOLLOWING */
-.followedUsers{
-    min-height: 500px;
+.followedUsers {
+  min-height: 500px;
 }
 
 /* FOLLOWERs */
-.followerUsers{
-    min-height: 500px;
+.followerUsers {
+  min-height: 500px;
 }
 
 /* RECEIVED MESSAGES SECTION */
-.itemMessage .messageImage{
-    width: 75px;
-    height: 75px;
-    border-radius: 100px;
-    overflow: hidden;
-    margin-right: 15px;
+.itemMessage .messageImage {
+  width: 75px;
+  height: 75px;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-right: 15px;
 }
 
-.itemMessage .messageImage img{
-    width: 120px;
+.itemMessage .messageImage img {
+  width: 120px;
 }
 
-.itemMessage .userName{
-    margin-top: 10px;
+.itemMessage .userName {
+  margin-top: 10px;
 }
 
-.itemMessage .userName .userNickname{
-    color: #969393;
+.itemMessage .userName .userNickname {
+  color: #969393;
 }
 
-.itemMessage .userName .nameAndSurname{
-    color: #555;
-    font-weight: bold;
+.itemMessage .userName .nameAndSurname {
+  color: #555;
+  font-weight: bold;
 }
 
-.defaultImage{
-    width: 100% !important;
+.defaultImage {
+  width: 100% !important;
 }
 
 #viewMessage {
-    margin-top: 30px !important;
+  margin-top: 30px !important;
 }
 
 .messageText {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .modal-header {
-    background-color:  #bd2020;
-    color: white;
+  background-color: #bd2020;
+  color: white;
 }
 
 .modal-header .button {
-    color: white !important;
+  color: white !important;
 }
 
 .modal-content {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .modal-body .nameAndSurname {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .modal-body .nameAndSurname .userNickname {
-    color: gray;
-    font-weight: bold;
+  color: gray;
+  font-weight: bold;
 }
 
 .modal-body .nameAndSurname .date {
-    color:  #555;
+  color: #555;
 }
 
 .messageBody {
-    border: 1px solid #888;
-    padding: 20px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+  border: 1px solid #888;
+  padding: 20px;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 .modal-footer {
-    background-color: #888;
+  background-color: #888;
 }
 
 .sidebar-admin {
-    border: 1px solid #888;
-    border-radius: 10px;
+  border: 1px solid #888;
+  border-radius: 10px;
 }

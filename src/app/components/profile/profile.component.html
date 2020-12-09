@@ -1,9 +1,9 @@
-<div class="col-lg-8">
+<div class="col-xs-12 col-lg-8">
     <h1 class="h1-strong">
         {{title}}
     </h1>
 
-    <div id="dataProfile" *ngIf="user">
+    <div id="dataProfile" class="clearfix" *ngIf="user">
         <!-- user's avatar -->
         <div class="userImage pull-left">
                 <img src="{{url + 'users/downloadImg/' + user.image}}" 
