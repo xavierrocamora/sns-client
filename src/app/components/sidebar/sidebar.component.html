@@ -1,95 +1,97 @@
-<div class="col-lg-4 sidebar-32">
-    <h1 class="h1-strong">
-        Hello, {{identity.nickname}}
-    </h1>
-</div>
-
-<div id="userCard" class="col-lg-4 panel panel-default pull-left">
-    <div class="avatar pull-left">
-        <img src="{{url + 'users/downloadImg/' + identity.image}}" *ngIf="identity.image"/>
-        <img src="assets/user.jpg" class="defaultImage" *ngIf="!identity.image"/>
+<div>
+    <div class="col-xs-12 col-sm-12 col-lg-4">
+        <h1 class="h1-strong">
+            Hello, {{identity.nickname}}
+        </h1>
     </div>
-
-    <div class="nameAndSurname pull-left">
-        <p class="username">
-            {{identity.name + ' ' + identity.surname}}
-        </p>
-        <p class="nickname">
-            {{identity.nickname}}
-        </p>
-
+    
+    <div id="userCard" class="col-xs-12 col-sm-12 col-lg-4 panel panel-default">
+        <div class="avatar pull-left">
+            <img src="{{url + 'users/downloadImg/' + identity.image}}" *ngIf="identity.image"/>
+            <img src="assets/user.jpg" class="defaultImage" *ngIf="!identity.image"/>
+        </div>
+    
+        <div class="nameAndSurname pull-left">
+            <p class="username">
+                {{identity.name + ' ' + identity.surname}}
+            </p>
+            <p class="nickname">
+                {{identity.nickname}}
+            </p>
+    
+            <div class="clearfix"></div>
+        </div>
+    
         <div class="clearfix"></div>
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="statCounters" *ngIf="statCounters">
-        <div class="userStatCounter">
-            <a [routerLink]="['/following', identity._id, 1]">
-                <span class="labelCounters">
-                    Following
-                </span>
-                <span class="dataCounters">
-                    {{statCounters.followed}}
-                </span>
-            </a>
-        </div>
-
-        <div class="userStatCounter">
-            <a [routerLink]="['/followers', identity._id, 1]">
-                <span class="labelCounters">
-                    Followers
-                </span>
-                <span class="dataCounters">
-                    {{statCounters.followers}}
-                </span>
-            </a>
-        </div>
-
-        <div class="userStatCounter">
-            <a href="#">
-                <span class="labelCounters">
-                    Publications
-                </span>
-                <span class="dataCounters">
-                    {{statCounters.publications}}
-                </span>
-            </a>
+    
+        <div class="statCounters" *ngIf="statCounters">
+            <div class="userStatCounter">
+                <a [routerLink]="['/following', identity._id, 1]">
+                    <span class="labelCounters">
+                        Following
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.followed}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="userStatCounter">
+                <a [routerLink]="['/followers', identity._id, 1]">
+                    <span class="labelCounters">
+                        Followers
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.followers}}
+                    </span>
+                </a>
+            </div>
+    
+            <div class="userStatCounter">
+                <a href="#">
+                    <span class="labelCounters">
+                        Publications
+                    </span>
+                    <span class="dataCounters">
+                        {{statCounters.publications}}
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- publications form -->
-<div id= "newPublication" class="col-lg-4 pull-left panel panel-default">
-    <div class="alert alert-success" *ngIf="status == 'success'">
-        Publication successfully created
-    </div>
-    <div class="alert alert-danger" *ngIf="status == 'error'">
-        {{onErrorMessage}}
-    </div>
-  
-    <form #newPublicationForm="ngForm" 
-    (ngSubmit)="onSubmit(newPublicationForm, $event);" 
-    class="col-lg-10">
-        <p>
-            <label>What are you thinking today?</label>
-            <textarea name="text" #text="ngModel" [(ngModel)]="publication.text" class="
-            form-control" required></textarea>
-            <span *ngIf="!text.valid && text.touched">
-                A text for the publication is required!
-            </span>
-        </p>
-
-        <p>
-            <label>Upload a picture</label>
-            <input #myFileInputField type="file" placeholder="Upload image" (change)="fileChangeEvent($event)"/>
-        </p>
-        <div id="loadedFile" *ngIf="filesToUpload && filesToUpload.length > 0">
-            File ready: {{filesToUpload[0].name}}
+    
+    <!-- publications form -->
+    <div id= "newPublication" class="col-xs-12 col-sm-12 col-lg-4 panel panel-default">
+        <div class="alert alert-success" *ngIf="status == 'success'">
+            Publication successfully created
         </div>
-
-        <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPublicationForm.
-        form.valid" />
-    </form>
-
+        <div class="alert alert-danger" *ngIf="status == 'error'">
+            {{onErrorMessage}}
+        </div>
+      
+        <form #newPublicationForm="ngForm" 
+        (ngSubmit)="onSubmit(newPublicationForm, $event);" 
+        class="col-lg-10">
+            <p>
+                <label>What are you thinking today?</label>
+                <textarea name="text" #text="ngModel" [(ngModel)]="publication.text" class="
+                form-control" required></textarea>
+                <span *ngIf="!text.valid && text.touched">
+                    A text for the publication is required!
+                </span>
+            </p>
+    
+            <p>
+                <label>Upload a picture</label>
+                <input #myFileInputField type="file" placeholder="Upload image" (change)="fileChangeEvent($event)"/>
+            </p>
+            <div id="loadedFile" *ngIf="filesToUpload && filesToUpload.length > 0">
+                File ready: {{filesToUpload[0].name}}
+            </div>
+    
+            <input type="submit" value="Send" class="btn btn-success" [disabled]="!newPublicationForm.
+            form.valid" />
+        </form>
+    
+    </div>
 </div>
